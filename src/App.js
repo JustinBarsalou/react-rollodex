@@ -53,11 +53,22 @@ class App extends Component {
     return (
       <div className="App">
       Rollodex
+
+      <ul>
+          {this.state.newRollo.map(person => {
+            <li>
+              {person.name}
+            </li>
+          }
+        )
+      }
+      </ul>
+
       </div>
       
-    )
+      )
+    }
   }
-}
 
 
 export default App;
