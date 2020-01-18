@@ -28,6 +28,10 @@
 
 
 import React, {Component} from 'react';
+// import Button from './App2'
+import Person from './Person'
+
+
 
 
 class App extends Component {
@@ -36,34 +40,50 @@ class App extends Component {
     this.state={
     newRollo:[],
     }
+    // this.isClicked = this.isClicked.bind(this)
   }
+
   componentDidMount() {
     fetch('https://randomuser.me/api?results=25')
     .then(response => response.json())
-    .then(data => this.setState({newRollo: data}));
+    .then(data => this.setState({newRollo: data.results}));
 
   }
+
+  // isClicked(){
+  //   this.setState(state => ({
+  //     isClicked: !state.isClicked
+  //   }))
+  // }
+
   
   
   render() {
     // This does something while it loads data
 
-    console.log(this.state.newRollo.results)
+    console.log(this.state.isClicked)
     // Main Render
     return (
-      <div className="App">
-      Rollodex
+      <div className="Main-App">
+          {this.state.newRollo.map((posts) => (
+            <div>
+              <Person 
+              firstName={posts.name.first} 
+              lastName={posts.name.last} 
+              thumbnail={posts.picture.thumbnail}
+              age={posts.dob.age}
+              phone={posts.cell}
+              />
 
-      <ul>
-          {this.state.newRollo.map(person => {
-            <li>
-              {person.name}
-            </li>
-          }
-        )
-      }
-      </ul>
+            {/* <h1 key='1'>{posts.name.first + ' ' + posts.name.last}</h1> 
 
+            <img src = {posts.picture.thumbnail}></img> */}
+
+            {/* <Button /> */}
+            {/* <button onClick={this.isClicked}>More Info</button> */}
+            
+            </div>
+          ))}
       </div>
       
       )
